@@ -28,7 +28,7 @@ services:
     ports:
     - "9005:80"
     volumes:
-    - /c/Users/yaz/IdeaProjects/dial/front/src/assets/conf:/etc/nginx/conf.d/
+    - ./front/src/assets/conf:/etc/nginx/conf.d/
   jenkins:
     container_name: jenkins
     image: jenkins/jenkins

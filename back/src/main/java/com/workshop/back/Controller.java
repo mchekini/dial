@@ -13,6 +13,6 @@ public class Controller {
 
     @GetMapping("/test")
     public Response test(){
-        return Response.status(200).entity("node 2 ok").build();
+        return Response.status(200).entity("node 2 pushé ok").build();
     }
 }
