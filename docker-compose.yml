@@ -1,0 +1,36 @@
+version: '2'
+services:
+  back-1:
+    build:
+      context: back
+      dockerfile: Dockerfile
+    image: back-1
+    container_name: back-1
+    ports:
+    - "9000:8080"
+  back-2:
+    build:
+      context: back
+      dockerfile: Dockerfile
+    image: back-2
+    container_name: back-2
+    ports:
+    - "9001:8080"
+  front:
+    build:
+      context: front
+      dockerfile: Dockerfile
+    container_name: front
+    image: front
+    links:
+    - back-1:back1
+    - back-2:back2
+    ports:
+    - "9005:80"
+    volumes:
+    - /c/Users/yaz/IdeaProjects/dial/front/src/assets/conf:/etc/nginx/conf.d/
+  jenkins:
+    container_name: jenkins
+    image: jenkins/jenkins
+    ports:
+    - "9010:8080"

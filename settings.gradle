@@ -1,0 +1,5 @@
+rootProject.name = 'dial'
+
+include ':back'
+include ':front'
+
