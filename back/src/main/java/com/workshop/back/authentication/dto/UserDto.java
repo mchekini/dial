@@ -4,9 +4,15 @@ package com.workshop.back.authentication.dto;
 import com.workshop.back.authentication.ValidationGroup;
 import com.workshop.back.registration.validations.CheckLogin;
 import com.workshop.back.registration.validations.CheckPassword;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserDto {
 
 

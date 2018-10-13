@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.annotation.Priority;
 import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +22,7 @@ public class RoleFilter implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
 
-        String userRole = "ADMIN";
+       /* String userRole = "ADMIN";
         Method method = ((HandlerMethod) handler).getMethod();
         final RolesAllowed rolesAllowed = method.getAnnotation(RolesAllowed.class);
 
@@ -32,5 +31,7 @@ public class RoleFilter implements HandlerInterceptor {
         if (roles.contains(userRole)) return true;
         response.setStatus(403);
         return false;
+        */
+       return true;
     }
 }
