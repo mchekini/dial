@@ -1,7 +1,10 @@
 package com.workshop.back.persistence.entity;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -12,6 +15,10 @@ import static javax.persistence.EnumType.STRING;
 
 @Entity
 @Data
+
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Member {
 
     @Id

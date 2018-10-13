@@ -1,4 +1,4 @@
-package com.workshop.back.authentication.validations;
+package com.workshop.back.registration.validations;
 
 public enum Error {
 
