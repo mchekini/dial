@@ -34,3 +34,8 @@ services:
     image: jenkins/jenkins
     ports:
     - "9010:8080"
+  postgres:
+    container_name: postgres
+    image: postgres
+    ports:
+    - "5432:5432"
