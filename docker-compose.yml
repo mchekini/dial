@@ -39,3 +39,26 @@ services:
     image: postgres
     ports:
     - "5432:5432"
+    environment:
+    - POSTGRES_PASSWORD=dev
+  postgres-preprod:
+    container_name: postgres-preprod
+    image: postgres
+    ports:
+    - "5433:5432"
+    environment:
+    - POSTGRES_PASSWORD=preprod
+  postgres-prod:
+    container_name: postgres-prod
+    image: postgres
+    ports:
+    - "5434:5432"
+    environment:
+    - POSTGRES_PASSWORD=prod
+  postgres-test:
+    container_name: postgres-test
+    image: postgres
+    ports:
+    - "5435:5432"
+    environment:
+    - POSTGRES_PASSWORD=test
