@@ -26,7 +26,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @ContextConfiguration(classes = [AuthenticationConfiguration, DatabaseConfig])
 @ActiveProfiles("test")
 @EnableAutoConfiguration
-class AuthenticationSpec extends Specification {
+class AuthenticationResourceSpec extends Specification {
 
     @LocalServerPort
     int port
