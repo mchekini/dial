@@ -1,4 +1,4 @@
-node{
+node('ubuntu-slave'){
 
     stage('checkout'){
         checkout([$class: 'GitSCM', branches: [[name: "*/$branch"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/mchekini/dial.git']]])
