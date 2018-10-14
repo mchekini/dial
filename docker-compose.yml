@@ -63,9 +63,6 @@ services:
     environment:
     - POSTGRES_PASSWORD=test
   ubuntu:
-    build:
-      context: ./
-      dockerfile: Dockerfile
     container_name: ubuntu
     image: mchekini/ubuntu-ssh:1
     ports:

@@ -2,3 +2,4 @@
 - configure liquibase
 - ssh start
 - adduser
+- killer un process unix --> hocine
