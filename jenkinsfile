@@ -5,7 +5,7 @@ node{
         checkout([$class: 'GitSCM', branches: [[name: "*/$branch"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/mchekini/dial.git']]])
     }
     stage('build'){
-        sh 'cd /back'
+        sh 'cd ./back'
         sh 'chmod +x gradlew'
     }
 }
