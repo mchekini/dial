@@ -1,0 +1,30 @@
+group 'com.final'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        maven { url = 'https://plugins.gradle.org/m2/' }
+    }
+    dependencies {
+        classpath 'gradle.plugin.com.github.lkishalmi.gatling:gradle-gatling-plugin:0.7.1'
+    }
+}
+
+apply plugin: 'com.github.lkishalmi.gatling'
+apply plugin: 'scala'
+
+// Overriding repository for gatling gradle plugin
+repositories {
+    mavenCentral()
+}
+dependencies {
+    compile group: 'org.scala-lang', name: 'scala-library', version: '2.12.4'
+    compile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: '2.2.5'
+
+}
+
+
+task performance(type: Exec){
+
+    commandLine 'sh', '-c', './gradlew gatlingRun'
+}
