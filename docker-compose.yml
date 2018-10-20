@@ -69,3 +69,77 @@ services:
     - "30:22"
     - "9011:8080"
     tty: true
+  rabbit1:
+    container_name: rabbit1
+    image: rabbitmq:3-management
+    hostname: rabbit1
+    ports:
+    - "4369:4369"
+    - "5671:5671"
+    - "5672:5672"
+    - "15672:15672"
+    - "25672:5672"
+    - "15671:15671"
+    volumes:
+    - /home/chekinimeh/Dev/dial/rabbitmq.config:/etc/rabbitmq/rabbitmq.config
+    - /home/chekinimeh/Dev/dial/definitions.json:/etc/rabbitmq/definitions.json
+    environment:
+    - RABBITMQ_ERLANG_COOKIE=secret string
+    - RABBITMQ_NODENAME=rabbit1
+    networks:
+    - default
+  rabbit2:
+      container_name: rabbit2
+      image: rabbitmq:3-management
+      hostname: rabbit2
+      ports:
+      - "5673:5672"
+      - "15673:15672"
+      - "25673:5672"
+      volumes:
+      - /home/chekinimeh/Dev/dial/rabbitmq.config:/etc/rabbitmq/rabbitmq.config
+      - /home/chekinimeh/Dev/dial/definitions.json:/etc/rabbitmq/definitions.json
+      environment:
+      - RABBITMQ_ERLANG_COOKIE=secret string
+      - RABBITMQ_NODENAME=rabbit2
+      networks:
+      - default
+      links:
+      - "rabbit1:rabbit1"
+  rabbit3:
+    container_name: rabbit3
+    image: rabbitmq:3-management
+    hostname: rabbit3
+    ports:
+    - "5674:5672"
+    - "15674:15672"
+    - "25674:5672"
+    volumes:
+    - /home/chekinimeh/Dev/dial/rabbitmq.config:/etc/rabbitmq/rabbitmq.config
+    - /home/chekinimeh/Dev/dial/definitions.json:/etc/rabbitmq/definitions.json
+    environment:
+    - RABBITMQ_ERLANG_COOKIE=secret string
+    - RABBITMQ_NODENAME=rabbit3
+    networks:
+    - default
+    links:
+    - "rabbit1:rabbit1"
+    - "rabbit2:rabbit2"
+
+
+
+
+
+
+
+networks:
+  default:
+    external:
+      name: dial_default
+
+
+
+#volumes:
+#  rabbitmqstats_data:
+#    driver: local
+

@@ -3,4 +3,5 @@ rootProject.name = 'dial'
 include ':back'
 include ':front'
 include ':perfs'
+include ':rmqloadblancer'
 
