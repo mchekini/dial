@@ -3,3 +3,10 @@ version '1.0-SNAPSHOT'
 
 
 
+task build(type:Exec){
+  commandLine 'sh', '-c', 'ng build'
+}
+
+task clean(type: Exec){
+  commandLine 'sh', '-c', 'rm -rf dist/'
+}
