@@ -73,13 +73,6 @@ services:
     container_name: rabbit1
     image: rabbitmq:3-management
     hostname: rabbit1
-    ports:
-    - "4369:4369"
-    - "5671:5671"
-    - "5672:5672"
-    - "15672:15672"
-    - "25672:5672"
-    - "15671:15671"
     volumes:
     - ./rabbitmq.config:/etc/rabbitmq/rabbitmq.config
     - ./definitions.json:/etc/rabbitmq/definitions.json
@@ -92,10 +85,8 @@ services:
       container_name: rabbit2
       image: rabbitmq:3-management
       hostname: rabbit2
-      ports:
-      - "5673:5672"
-      - "15673:15672"
-      - "25673:5672"
+      depends_on:
+      - rabbit1
       volumes:
       - ./rabbitmq.config:/etc/rabbitmq/rabbitmq.config
       - ./definitions.json:/etc/rabbitmq/definitions.json
@@ -110,10 +101,9 @@ services:
     container_name: rabbit3
     image: rabbitmq:3-management
     hostname: rabbit3
-    ports:
-    - "5674:5672"
-    - "15674:15672"
-    - "25674:5672"
+    depends_on:
+    - rabbit1
+    - rabbit2
     volumes:
     - ./rabbitmq.config:/etc/rabbitmq/rabbitmq.config
     - ./definitions.json:/etc/rabbitmq/definitions.json
@@ -130,14 +120,18 @@ services:
     environment:
     - MODE=tcp
     links:
+    - "rabbit1:rabbit1"
+    - "rabbit2:rabbit2"
+    - "rabbit3:rabbit3"
+    volumes:
+    - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    depends_on:
     - rabbit1
     - rabbit2
     - rabbit3
-    volumes:
-    - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
     ports:
-    - 15675:15672
-    - 5675:5672
+    - 15672:15672
+    - 5672:5672
     networks:
     - default
 
