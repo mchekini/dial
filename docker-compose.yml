@@ -33,33 +33,33 @@ services:
     container_name: jenkins
     image: jenkins/jenkins
     ports:
-    - "9010:8080"
+    - "9012:8080"
   postgres:
     container_name: postgres
     image: postgres
     ports:
-    - "5432:5432"
+    - "5433:5432"
     environment:
     - POSTGRES_PASSWORD=dev
   postgres-preprod:
     container_name: postgres-preprod
     image: postgres
     ports:
-    - "5433:5432"
+    - "5434:5432"
     environment:
     - POSTGRES_PASSWORD=preprod
   postgres-prod:
     container_name: postgres-prod
     image: postgres
     ports:
-    - "5434:5432"
+    - "5435:5432"
     environment:
     - POSTGRES_PASSWORD=prod
   postgres-test:
     container_name: postgres-test
     image: postgres
     ports:
-    - "5435:5432"
+    - "5436:5432"
     environment:
     - POSTGRES_PASSWORD=test
   ubuntu:
@@ -81,8 +81,8 @@ services:
     - "25672:5672"
     - "15671:15671"
     volumes:
-    - /home/chekinimeh/Dev/dial/rabbitmq.config:/etc/rabbitmq/rabbitmq.config
-    - /home/chekinimeh/Dev/dial/definitions.json:/etc/rabbitmq/definitions.json
+    - /Users/mac-soat/IdeaProjects/dial/rabbitmq.config:/etc/rabbitmq/rabbitmq.config
+    - /Users/mac-soat/IdeaProjects/dial/definitions.json:/etc/rabbitmq/definitions.json
     environment:
     - RABBITMQ_ERLANG_COOKIE=secret string
     - RABBITMQ_NODENAME=rabbit1
@@ -97,8 +97,8 @@ services:
       - "15673:15672"
       - "25673:5672"
       volumes:
-      - /home/chekinimeh/Dev/dial/rabbitmq.config:/etc/rabbitmq/rabbitmq.config
-      - /home/chekinimeh/Dev/dial/definitions.json:/etc/rabbitmq/definitions.json
+      - /Users/mac-soat/IdeaProjects/dial/rabbitmq.config:/etc/rabbitmq/rabbitmq.config
+      - /Users/mac-soat/IdeaProjects/dial/definitions.json:/etc/rabbitmq/definitions.json
       environment:
       - RABBITMQ_ERLANG_COOKIE=secret string
       - RABBITMQ_NODENAME=rabbit2
@@ -115,8 +115,8 @@ services:
     - "15674:15672"
     - "25674:5672"
     volumes:
-    - /home/chekinimeh/Dev/dial/rabbitmq.config:/etc/rabbitmq/rabbitmq.config
-    - /home/chekinimeh/Dev/dial/definitions.json:/etc/rabbitmq/definitions.json
+    - /Users/mac-soat/IdeaProjects/dial/rabbitmq.config:/etc/rabbitmq/rabbitmq.config
+    - /Users/mac-soat/IdeaProjects/dial/definitions.json:/etc/rabbitmq/definitions.json
     environment:
     - RABBITMQ_ERLANG_COOKIE=secret string
     - RABBITMQ_NODENAME=rabbit3
@@ -125,6 +125,34 @@ services:
     links:
     - "rabbit1:rabbit1"
     - "rabbit2:rabbit2"
+  #haproxy:
+    #image: haproxy
+    #volumes:
+    #- ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    #depends_on:
+    #- rabbit1
+    #- rabbit2
+    #- rabbit3
+    #ports:
+    #- 15675:15672
+    #- 5675:5672
+    #networks:
+    #- default
+  lb:
+    image: haproxy
+    environment:
+    - MODE=tcp
+    links:
+    - rabbit1
+    - rabbit2
+    - rabbit3
+    volumes:
+    - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    ports:
+    - 15675:15672
+    - 5675:5672
+    networks:
+    - default
 
 
 
@@ -134,8 +162,8 @@ services:
 
 networks:
   default:
-    external:
-      name: dial_default
+    #external:
+      #name: dial_default
 
 
 
