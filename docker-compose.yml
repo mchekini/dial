@@ -34,6 +34,8 @@ services:
     image: jenkins/jenkins
     ports:
     - "9010:8080"
+    volumes:
+    - ./jenkins_data/:/var/jenkins_home
   postgres:
     container_name: postgres
     image: postgres

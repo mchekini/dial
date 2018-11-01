@@ -4,7 +4,7 @@ version '1.0-SNAPSHOT'
 
 
 task build(type:Exec){
-  commandLine 'sh', '-c', 'ng build'
+  commandLine 'sh', '-c', 'ng build --prod'
 }
 
 task clean(type: Exec){
