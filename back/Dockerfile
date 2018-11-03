@@ -4,4 +4,4 @@ WORKDIR /opt
 ADD build/libs/back-*.jar back.jar
 ENV JAVA_OPTS "-Djava.security.egd=file:/dev/./urandom"
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=9080", "/opt/back.jar"]
+ENTRYPOINT ["java", "-jar", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=9080", "/opt/back.jar", "--spring.config.location=file:/opt/conf/conf.properties"]
