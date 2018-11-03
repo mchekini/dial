@@ -64,10 +64,3 @@ services:
     - "5435:5432"
     environment:
     - POSTGRES_PASSWORD=test
-  ubuntu:
-    container_name: ubuntu
-    image: mchekini/ubuntu-ssh:1
-    ports:
-    - "30:22"
-    - "9011:8080"
-    tty: true
